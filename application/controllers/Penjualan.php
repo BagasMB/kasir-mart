@@ -41,19 +41,6 @@ class Penjualan extends CI_Controller
         $this->template->load('template', 'kasir/transaksi', $data);
     }
 
-    // public function keranjang()
-    // {
-    //     $data = array(
-    //         'id'      => $this->input->post('kode_barang'),
-    //         'qty'     => $this->input->post('jumlah'),
-    //         'price'   => $this->input->post('harga'),
-    //         'name'    => $this->input->post('nama'),
-    //     );
-
-    //     $this->cart->insert($data);
-    //     redirect($_SERVER['HTTP_REFERER']);
-    // }
-
     public function tambahKeranjang()
     {
         $cek = $this->db->where('kode_barang', $this->input->post('kode_barang'))->where('id_pelanggan', $this->input->post('id_pelanggan'))->where('id_user', $this->session->userdata('id_user'))->get('temp')->result_array();
@@ -75,65 +62,6 @@ class Penjualan extends CI_Controller
         $this->db->delete('temp', $where);
         $this->session->set_flashdata('berhasil', 'Barang berhasil dihapus dari keranjang');
         redirect($_SERVER['HTTP_REFERER']);
-    }
-
-    public function bayar()
-    {
-        date_default_timezone_set('Asia/Jakarta');
-        $tanggal = date('Y-m');
-        $this->db->where("DATE_FORMAT(tanggal,'%Y-%m')", $tanggal)->from('penjualan');
-        $jumlah = $this->db->count_all_results();
-        $nota = date('ymd') . $jumlah + 1;
-
-        $temp = $this->db->join('barang', 'temp.kode_barang = barang.kode_barang')->where('id_user', $this->session->userdata('id_user'))->where('id_pelanggan', $this->input->post('id_pelanggan'))->get('temp')->result_array();
-        foreach ($temp as $value) {
-            if ($value['stok'] < $value['jumlah']) {
-                $this->session->set_flashdata('gagal', 'Produk yang dipilih tidak cukup');
-                redirect($_SERVER['HTTP_REFERER']);
-            } else {
-                // Input Table Detail
-                $data1 = [
-                    'kode_penjualan'    => $nota,
-                    'kode_barang'       => $value['kode_barang'],
-                    'jumlah'            => $value['jumlah'],
-                    'sub_total'         => $value['jumlah'] * $value['harga'],
-                ];
-                $this->db->insert('detail_penjualan', $data1);
-
-                // Update Stok barang
-                $data2 = ['stok' => $value['stok'] - $value['jumlah']];
-                $where1 = ['kode_barang' => $value['kode_barang']];
-                $this->db->update('barang', $data2, $where1);
-
-                // hapus table temp
-                $where2 = [
-                    'id_pelanggan' => $this->input->post('id_pelanggan'),
-                    'id_user', $this->session->userdata('id_user')
-                ];
-                $this->db->delete('temp', $where2);
-            }
-        }
-        $data = [
-            'kode_penjualan'    => $nota,
-            'id_pelanggan'      => $this->input->post('id_pelanggan'),
-            'total_tagihan'     => $this->input->post('total_tagihan'),
-            'tanggal'           => date('Y-m-d'),
-        ];
-        $this->db->insert('penjualan', $data);
-
-        $pelanggan = $this->db->where('id_pelanggan', $this->input->post('id_pelanggan'))->get('pelanggan')->row();
-        $total = $this->input->post('total_tagihan');
-        if ($total > 10000) {
-            $poin = ($total * 3) / 100;
-        }
-        $poinakhir = $poin + $pelanggan->poin;
-        $data2 = ['poin' => $poinakhir];
-        $where = ['id_pelanggan' => $this->input->post('id_pelanggan')];
-        $this->db->update('pelanggan', $data2, $where);
-
-
-        $this->session->set_flashdata('berhasil', 'Barang berhasil diBayar');
-        redirect('penjualan/invoice/' . $nota);
     }
 
     public function invoice($kode_penjualan)

@@ -66,22 +66,5 @@
                 </tfoot>
             </table>
         </div>
-        <!-- <div class="row pb-30">
-            <div class="col-md-8"></div>
-            <div class="text-right col-md-2">
-                <div>Total :</div>
-                <div>Potongan Harga :</div>
-                <div>Total Pembayaran :</div>
-                <div>DiBayar :</div>
-                <div>Kembalian :</div>
-            </div>
-            <div class="text-right col-md-2">
-                <div>Rp. <?= number_format($penjualan->total_tagihan, 0, ',', '.'); ?></div>
-                <div>- Rp. <?= number_format($penjualan->potongan_harga, 0, ',', '.'); ?></div>
-                <div>Rp. <?= number_format($penjualan->total_tagihan - $penjualan->potongan_harga, 0, ',', '.'); ?></div>
-                <div>Rp. <?= number_format($penjualan->bayar, 0, ',', '.'); ?></div>
-                <div>Rp. <?= number_format($penjualan->bayar - ($penjualan->total_tagihan - $penjualan->potongan_harga), 0, ',', '.'); ?></div>
-            </div>
-        </div> -->
     </div>
 </div>
