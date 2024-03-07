@@ -7,14 +7,15 @@
         <div class="row pb-30">
             <div class="col-md-6">
                 <h5 class="mb-15"><?= $penjualan->nama_pelanggan; ?></h5>
-                <p class="font-14 mb-5">Date Issued: <strong class="weight-600"><?= $penjualan->tanggal; ?></strong></p>
-                <p class="font-14 mb-5">Invoice No: <strong class="weight-600"><strong><?= $penjualan->kode_penjualan; ?></strong></p>
+                <p class="font-14 mb-5">Tanggal: <strong class="weight-600"><?= date('d-m-Y', strtotime($penjualan->tanggal)); ?></strong></p>
+                <p class="font-14 mb-5">No Invoice: <strong class="weight-600"><?= $penjualan->kode_penjualan; ?></strong></p>
+                <p class="font-14 mb-5">Alamat: <strong class="weight-600"><?= $penjualan->alamat; ?></strong></p>
             </div>
             <div class="col-md-6">
                 <div class="text-right">
-                    <p class="font-14 mb-5"><?= $user['nama']; ?> </strong></p>
-                    <p class="font-14 mb-5">Jalan in aja dulu</p>
-                    <p class="font-14 mb-5">Jungke City</p>
+                    <h6 class="mb-15"><?= $penjualan->nama; ?></h6>
+                    <p class="font-14 mb-5"><?= $konfig->judul_website; ?></p>
+                    <p class="font-14 mb-5"><?= $konfig->alamat; ?></p>
                     <p class="font-14 mb-5">Postcode 57713</p>
                 </div>
             </div>
@@ -65,6 +66,15 @@
                     </tr>
                 </tfoot>
             </table>
+            <div class="footer-wrap pd-20 mb-20">
+                Kritik&Saran : <?= $konfig->no_wa; ?> <br>
+                Email : <?= $konfig->email; ?>
+            </div>
+            <div class="text-right">
+                <a href="<?= base_url('penjualan/printInvoice/' . $nota); ?>" target="_blank" class="btn btn-success btn-lg">
+                    <i class="fa fa-print"></i> Print
+                </a>
+            </div>
         </div>
     </div>
 </div>

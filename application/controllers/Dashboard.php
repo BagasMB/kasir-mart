@@ -28,4 +28,32 @@ class Dashboard extends CI_Controller
 		];
 		$this->template->load('template', 'dashboard', $data);
 	}
+
+	public function profile()
+	{
+		$data = [
+			'title' => 'Profile Website',
+			'konfig' => $this->db->get('konfigurasi')->row(),
+			'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
+		];
+		$this->template->load('template', 'profile', $data);
+	}
+
+	public function updateprofile()
+	{
+		$where = ['id_konfigurasi' => 1];
+		$data = [
+			'judul_website' => $this->input->post('judul_website'),
+			'profil_website' => $this->input->post('profil_website'),
+			'instagram' => $this->input->post('instagram'),
+			'twitter' => $this->input->post('twitter'),
+			'facebook' => $this->input->post('facebook'),
+			'alamat' => $this->input->post('alamat'),
+			'email' => $this->input->post('email'),
+			'no_wa' => $this->input->post('no_wa'),
+		];
+		$this->db->update('konfigurasi', $data, $where);
+		$this->session->set_flashdata('berhasil', 'Gemgeekang Gacorr!!!');
+		redirect('Profile-Website');
+	}
 }

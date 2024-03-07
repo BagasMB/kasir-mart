@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Mar 2024 pada 11.43
+-- Waktu pembuatan: 07 Mar 2024 pada 02.03
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.0.28
 
@@ -42,8 +42,8 @@ CREATE TABLE `barang` (
 
 INSERT INTO `barang` (`id_barang`, `kode_barang`, `nama`, `stok`, `harga`, `id_kategori`) VALUES
 (1, 'B0001', 'Kemeja', 0, 70000, 1),
-(3, 'B0002', 'Roti', 40, 2000, 5),
-(4, 'B0003', 'Sepatu', 100, 100000, 1),
+(3, 'B0002', 'Roti', 18, 2000, 5),
+(4, 'B0003', 'Sepatu', 47, 100000, 1),
 (5, 'B0004', 'Hoodie', 0, 70000, 1),
 (6, 'B0005', 'Tas', 0, 100000, 1),
 (7, 'B0006', 'Teh Gelas', 10, 1000, 6),
@@ -90,7 +90,12 @@ INSERT INTO `detail_penjualan` (`id_detail_penjualan`, `kode_penjualan`, `kode_b
 (20, 24022811, 'B0001', 1, 70000),
 (21, 24022812, 'B0001', 1, 70000),
 (22, 2403011, 'B0003', 60, 6000000),
-(23, 2403012, 'B0001', 68, 4760000);
+(23, 2403012, 'B0001', 68, 4760000),
+(24, 2403043, 'B0003', 1, 100000),
+(25, 2403044, 'B0003', 50, 5000000),
+(26, 2403065, 'B0002', 10, 20000),
+(29, 2403066, 'B0003', 2, 200000),
+(30, 2403067, 'B0002', 1, 2000);
 
 -- --------------------------------------------------------
 
@@ -115,6 +120,31 @@ INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `konfigurasi`
+--
+
+CREATE TABLE `konfigurasi` (
+  `id_konfigurasi` int(11) NOT NULL,
+  `judul_website` varchar(30) NOT NULL,
+  `profil_website` text NOT NULL,
+  `instagram` varchar(50) NOT NULL,
+  `twitter` varchar(50) NOT NULL,
+  `facebook` varchar(80) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `alamat` varchar(50) NOT NULL,
+  `no_wa` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `konfigurasi`
+--
+
+INSERT INTO `konfigurasi` (`id_konfigurasi`, `judul_website`, `profil_website`, `instagram`, `twitter`, `facebook`, `email`, `alamat`, `no_wa`) VALUES
+(1, 'Kasir-Mart', 'Haool', 'https://www.instagram.com/bgsmhrdkabdhrto_/', '', '', 'bagasmahardikabudi2007@gmail.com', 'Padangan RT 01/RW 07, Jungke, Karanganyar', '081235540603');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `pelanggan`
 --
 
@@ -132,9 +162,10 @@ CREATE TABLE `pelanggan` (
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `telp`, `alamat`, `poin`) VALUES
 (1, 'Bukan Pelanggan', '-', '-', 0),
-(2, 'Bagas', '0812335540603', 'Padangan, Jungke', 142800),
+(2, 'Bagas', '0812335540603', 'Padangan, Jungke', 435600),
 (3, 'Decooo', '12345678', 'Leptop Rusak', 180000),
-(4, 'Misbo', '0812888', 'ra ndue', 0);
+(4, 'Misbo', '0812888', 'ra ndue', 0),
+(5, 'Budi Santosa', '12345678', 'ok', 12000);
 
 -- --------------------------------------------------------
 
@@ -175,31 +206,36 @@ CREATE TABLE `penjualan` (
   `tanggal` date NOT NULL,
   `total_tagihan` int(11) NOT NULL,
   `id_pelanggan` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `potongan_harga` int(11) NOT NULL,
-  `bayar` int(11) NOT NULL,
-  `kembalian` int(11) NOT NULL
+  `bayar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `penjualan`
 --
 
-INSERT INTO `penjualan` (`id_penjualan`, `kode_penjualan`, `tanggal`, `total_tagihan`, `id_pelanggan`, `potongan_harga`, `bayar`, `kembalian`) VALUES
-(1, 2402071, '2024-01-25', 135000, 2, 0, 150000, 15000),
-(2, 2402072, '2024-02-07', 212000, 2, 205900, 220000, 0),
-(3, 2402073, '2024-02-07', 140000, 2, 6360, 150000, 0),
-(4, 2402084, '2024-02-08', 140000, 2, 4200, 140000, 0),
-(5, 2402085, '2024-02-08', 350000, 2, 14000, 400000, 0),
-(6, 2402095, '2024-02-09', 270000, 1, 0, 300000, 0),
-(7, 2402186, '2024-02-18', 904000, 1, 10000, 1000000, 0),
-(8, 2402187, '2024-02-18', 70000, 1, 10000, 100000, 0),
-(9, 2402188, '2024-02-18', 70000, 1, 10000, 70000, 0),
-(12, 2402209, '2024-02-20', 15420000, 2, 110700, 15500000, 0),
-(13, 24022810, '2024-02-28', 1000000, 3, 0, 1000000, 0),
-(14, 24022811, '2024-02-28', 70000, 2, 10000, 70000, 0),
-(15, 24022812, '2024-02-28', 70000, 2, 20000, 70000, 0),
-(16, 2403011, '2024-03-01', 6000000, 3, 30610, 6000000, 0),
-(17, 2403012, '2024-03-01', 4760000, 2, 1850400, 4760000, 0);
+INSERT INTO `penjualan` (`id_penjualan`, `kode_penjualan`, `tanggal`, `total_tagihan`, `id_pelanggan`, `id_user`, `potongan_harga`, `bayar`) VALUES
+(1, 2402071, '2024-01-25', 135000, 2, 1, 0, 150000),
+(2, 2402072, '2024-02-07', 212000, 2, 1, 205900, 220000),
+(3, 2402073, '2024-02-07', 140000, 2, 1, 6360, 150000),
+(4, 2402084, '2024-02-08', 140000, 2, 1, 4200, 140000),
+(5, 2402085, '2024-02-08', 350000, 2, 1, 14000, 400000),
+(6, 2402095, '2024-02-09', 270000, 1, 1, 0, 300000),
+(7, 2402186, '2024-02-18', 904000, 1, 5, 10000, 1000000),
+(8, 2402187, '2024-02-18', 70000, 1, 5, 10000, 100000),
+(9, 2402188, '2024-02-18', 70000, 1, 5, 10000, 70000),
+(12, 2402209, '2024-02-20', 15420000, 2, 1, 110700, 15500000),
+(13, 24022810, '2024-02-28', 1000000, 3, 5, 0, 1000000),
+(14, 24022811, '2024-02-28', 70000, 2, 1, 10000, 70000),
+(15, 24022812, '2024-02-28', 70000, 2, 1, 20000, 70000),
+(16, 2403011, '2024-03-01', 6000000, 3, 1, 30610, 6000000),
+(17, 2403012, '2024-03-01', 4760000, 2, 5, 1850400, 4760000),
+(18, 2403043, '2024-03-04', 100000, 2, 1, 0, 150000),
+(19, 2403044, '2024-03-04', 5000000, 2, 5, 100000, 5000000),
+(20, 2403065, '2024-03-06', 20000, 4, 1, 100000, 20000),
+(25, 2403066, '2024-03-06', 200000, 5, 1, 0, 200000),
+(26, 2403067, '2024-03-06', 2000, 5, 1, 0, 2000);
 
 -- --------------------------------------------------------
 
@@ -262,6 +298,13 @@ CREATE TABLE `temp` (
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `temp`
+--
+
+INSERT INTO `temp` (`id_temp`, `kode_barang`, `jumlah`, `id_pelanggan`, `id_user`) VALUES
+(42, 'B0003', 1, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -304,8 +347,9 @@ CREATE TABLE `voucher` (
 --
 
 INSERT INTO `voucher` (`id_voucher`, `nama_voucher`, `potongan_harga`, `jumlah`, `waktu`) VALUES
-(2, 'Awal Bulan', 10000, 3, '2024-02-28'),
-(3, 'Vippp', 100000, 4, '2024-02-20');
+(2, 'Awal Bulan', 10000, 3, '2024-03-29'),
+(3, 'Vippp', 100000, 4, '2024-02-20'),
+(4, 'voucher ramadhan', 100000, 0, '2024-03-20');
 
 --
 -- Indexes for dumped tables
@@ -328,6 +372,12 @@ ALTER TABLE `detail_penjualan`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`);
+
+--
+-- Indeks untuk tabel `konfigurasi`
+--
+ALTER TABLE `konfigurasi`
+  ADD PRIMARY KEY (`id_konfigurasi`);
 
 --
 -- Indeks untuk tabel `pelanggan`
@@ -391,7 +441,7 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT untuk tabel `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
-  MODIFY `id_detail_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_detail_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT untuk tabel `kategori`
@@ -400,10 +450,16 @@ ALTER TABLE `kategori`
   MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT untuk tabel `konfigurasi`
+--
+ALTER TABLE `konfigurasi`
+  MODIFY `id_konfigurasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembelian`
@@ -415,7 +471,7 @@ ALTER TABLE `pembelian`
 -- AUTO_INCREMENT untuk tabel `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT untuk tabel `suara_8`
@@ -433,7 +489,7 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT untuk tabel `temp`
 --
 ALTER TABLE `temp`
-  MODIFY `id_temp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_temp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
@@ -445,7 +501,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `voucher`
 --
 ALTER TABLE `voucher`
-  MODIFY `id_voucher` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_voucher` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

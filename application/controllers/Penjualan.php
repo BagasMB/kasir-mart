@@ -69,8 +69,9 @@ class Penjualan extends CI_Controller
         $data = [
             'title'         => 'Invoice',
             'nota'          => $kode_penjualan,
+            'konfig'        => $this->db->get('konfigurasi')->row(),
             'detail'        => $this->db->join('barang', 'detail_penjualan.kode_barang = barang.kode_barang')->where('kode_penjualan', $kode_penjualan)->get('detail_penjualan')->result_array(),
-            'penjualan'     => $this->db->join('pelanggan', 'penjualan.id_pelanggan = pelanggan.id_pelanggan')->where('kode_penjualan', $kode_penjualan)->get('penjualan')->row(),
+            'penjualan'     => $this->db->join('pelanggan', 'penjualan.id_pelanggan = pelanggan.id_pelanggan')->join('user', 'penjualan.id_user = user.id_user')->where('kode_penjualan', $kode_penjualan)->get('penjualan')->row(),
             'user'          => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
         ];
         $this->template->load('template', 'kasir/invoice', $data);
@@ -110,7 +111,7 @@ class Penjualan extends CI_Controller
                         // hapus table temp
                         $where2 = [
                             'id_pelanggan' => $this->input->post('id_pelanggan'),
-                            'id_user', $this->session->userdata('id_user')
+                            'id_user' => $this->session->userdata('id_user'),
                         ];
                         $this->db->delete('temp', $where2);
                     }
@@ -120,6 +121,7 @@ class Penjualan extends CI_Controller
                     'id_pelanggan'      => $this->input->post('id_pelanggan'),
                     'total_tagihan'     => $this->input->post('total_tagihan'),
                     'bayar'             => $this->input->post('bayar'),
+                    'id_user'           => $this->session->userdata('id_user'),
                     'potongan_harga'    => $this->input->post('poin') + $voucher->potongan_harga,
                     'tanggal'           => date('Y-m-d'),
                 ];
@@ -151,5 +153,17 @@ class Penjualan extends CI_Controller
             $this->session->set_flashdata('gagal', 'Poin tidak cukup');
             redirect($_SERVER['HTTP_REFERER']);
         }
+    }
+
+    public function printInvoice($kode_penjualan)
+    {
+        $data = [
+            'detail'        => $this->db->join('barang', 'detail_penjualan.kode_barang = barang.kode_barang')->where('kode_penjualan', $kode_penjualan)->get('detail_penjualan')->result_array(),
+            'penjualan'     => $this->db->join('pelanggan', 'penjualan.id_pelanggan = pelanggan.id_pelanggan')->join('user', 'penjualan.id_user = user.id_user')->where('kode_penjualan', $kode_penjualan)->get('penjualan')->row(),
+            'user'          => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
+            'konfig'        => $this->db->get('konfigurasi')->row()
+        ];
+
+        $this->load->view('printInvoice', $data);
     }
 }
