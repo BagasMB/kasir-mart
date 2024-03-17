@@ -24,25 +24,10 @@
             </div>
         </div>
         <form action="<?= base_url('update-profile') ?>" method="post" enctype="multipart/form-data">
+            <input type="hidden" class="form-control" name="id_konfigurasi" value="<?= $konfig->id_konfigurasi; ?>" autocomplete="off">
             <div class="form-group">
-                <label>Judul website</label>
-                <input type="text" class="form-control" name="judul_website" value="<?= $konfig->judul_website; ?>" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label>Profile Website</label>
-                <textarea class="form-control" name="profil_website" rows="3"><?= $konfig->profil_website; ?></textarea>
-            </div>
-            <div class="form-group">
-                <label>Instagram</label>
-                <input type="text" class="form-control" name="instagram" value="<?= $konfig->instagram; ?>" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label>Twitter</label>
-                <input type="text" class="form-control" name="twitter" value="<?= $konfig->twitter; ?>" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label>Facebook</label>
-                <input type="text" class="form-control" name="facebook" value="<?= $konfig->facebook; ?>" autocomplete="off">
+                <label>Nama CV</label>
+                <input type="text" class="form-control" name="nama_cv" value="<?= $konfig->nama_cv; ?>" autocomplete="off">
             </div>
             <div class="form-group">
                 <label>Email</label>

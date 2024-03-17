@@ -26,7 +26,7 @@ class Penjualan extends CI_Controller
     }
 
 
-    public function transaksi($id_pelanggan = null)
+    public function transaksi($id_pelanggan = !null)
     {
         date_default_timezone_set('Asia/Jakarta');
         $data = [
@@ -52,6 +52,21 @@ class Penjualan extends CI_Controller
         } else {
             $this->TransaksiModel->tambahKeranjang();
             $this->session->set_flashdata('berhasil', 'Barang ditambah ke keranjang');
+        }
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
+    public function updateKeranjang()
+    {
+        $kode_barang = $this->db->where('id_temp', $this->input->post('id_temp'))->get('temp')->row()->kode_barang;
+        $stokLama = $this->db->from('barang')->where('kode_barang', $kode_barang)->get()->row()->stok;
+        if ($stokLama < $this->input->post('jumlah')) {
+            $this->session->set_flashdata('gagal', 'Stok Barang tidak cukup');
+        } else {
+            $data = array('jumlah' => $this->input->post('jumlah'));
+            $where = array('id_temp' => $this->input->post('id_temp'));
+            $this->db->update('temp', $data, $where);
+            $this->session->set_flashdata('berhasil', 'Jumlah berhasil diubah');
         }
         redirect($_SERVER['HTTP_REFERER']);
     }
@@ -99,7 +114,6 @@ class Penjualan extends CI_Controller
                             'kode_penjualan'    => $nota,
                             'kode_barang'       => $value['kode_barang'],
                             'jumlah'            => $value['jumlah'],
-                            'sub_total'         => $value['jumlah'] * $value['harga'],
                         ];
                         $this->db->insert('detail_penjualan', $data1);
 

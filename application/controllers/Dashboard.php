@@ -41,13 +41,9 @@ class Dashboard extends CI_Controller
 
 	public function updateprofile()
 	{
-		$where = ['id_konfigurasi' => 1];
+		$where = ['id_konfigurasi' => $this->input->post('id_konfigurasi')];
 		$data = [
-			'judul_website' => $this->input->post('judul_website'),
-			'profil_website' => $this->input->post('profil_website'),
-			'instagram' => $this->input->post('instagram'),
-			'twitter' => $this->input->post('twitter'),
-			'facebook' => $this->input->post('facebook'),
+			'nama_cv' => $this->input->post('nama_cv'),
 			'alamat' => $this->input->post('alamat'),
 			'email' => $this->input->post('email'),
 			'no_wa' => $this->input->post('no_wa'),

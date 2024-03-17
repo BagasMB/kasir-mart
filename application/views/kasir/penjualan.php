@@ -146,9 +146,6 @@
                         </table>
                     </div>
                 </div>
-                <!-- <div class="modal-footer">
-                    <a href="<?= base_url('penjualan/transaksi/'); ?>" class="btn btn-secondary">Non Member</a>
-                </div> -->
             </div>
         </div>
     </div>

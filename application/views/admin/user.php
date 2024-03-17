@@ -53,11 +53,11 @@
                                         <i class="dw dw-more"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                        <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
                                         <button data-toggle="modal" data-target="#modal-edit<?= $ser['id_user']; ?>" class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</button>
                                         <?php if ($user['username'] != $ser['username']) : ?>
                                             <a class="dropdown-item" href="<?= base_url('user/hapus/' . $ser['id_user']); ?>" id="btn-hapus"><i class="dw dw-delete-3"></i> Delete</a>
                                         <?php endif; ?>
+                                        <a class="dropdown-item" href="<?= base_url('user/reset/' . $ser['id_user']); ?>"><i class="dw dw-refresh2"></i> Reset Sandi</a>
                                     </div>
                                 </div>
                             </td>

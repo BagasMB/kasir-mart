@@ -59,6 +59,15 @@ class User extends CI_Controller
         redirect('user');
     }
 
+    public function reset($id_user)
+    {
+        $data = array('password' => md5(1234));
+        $where = array('id_user' => $id_user);
+        $this->db->update('user', $data, $where);
+        $this->session->set_flashdata('berhasil', 'Password direset menjadi 1234!!!');
+        redirect('user');
+    }
+
     public function hapus($id)
     {
         $where = array('id_user' => $id);

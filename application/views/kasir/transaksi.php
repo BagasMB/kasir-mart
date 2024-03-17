@@ -95,10 +95,32 @@
                                     <td>Rp. <?= number_format($tail['harga'], 0, ',', '.'); ?></td>
                                     <td>Rp. <?= number_format($tail['jumlah'] * $tail['harga'], 0, ',', '.'); ?></td>
                                     <td>
-                                        <button data-toggle="modal" data-target="#modal-edit" class="btn btn-sm btn-warning"><i class="dw dw-edit2"></i></button>
+                                        <button data-toggle="modal" data-target="#modal-edit-jumlah<?= $tail['id_temp']; ?>" class="btn btn-sm btn-warning"><i class="dw dw-edit2"></i></button>
                                         <a class="btn btn-sm btn-danger" href="<?= base_url('penjualan/hapusKeranjang/' . $tail['id_temp']); ?>" id="btn-hapus"><i class="dw dw-delete-3"></i></a>
                                     </td>
                                 </tr>
+                                <div class="modal fade" id="modal-edit-jumlah<?= $tail['id_temp']; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myLargeModalLabel">Ubah Jumlah</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            </div>
+                                            <form action="<?= base_url('penjualan/updateKeranjang'); ?>" method="post">
+                                                <div class="modal-body">
+                                                    <input type="hidden" value="<?= $tail['id_temp']; ?>" name="id_temp">
+                                                    <div class="form-group">
+                                                        <label for="jumlah">Jumlah</label>
+                                                        <input type="text" class="form-control" id="jumlah" value="<?= $tail['jumlah']; ?>" name="jumlah" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Ubah</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php $total = $total + $tail['jumlah'] * $tail['harga'];
                             endforeach; ?>
                         </tbody>
@@ -149,7 +171,7 @@
                                     <?php if ($pelanggan->id_pelanggan > 1) : ?>
                                         <div class="col-md-4 col-sm-12 mb-2">
                                             <label>Poin (<?= $pelanggan->poin; ?>)</label>
-                                            <input class="form-control" type="text" value="0" name="poin" autocomplete="off">
+                                            <input class="form-control" type="number" value="0" name="poin" required autocomplete="off">
                                         </div>
                                     <?php endif; ?>
                                     <div class="col-md-4 col-sm-12 mb-2">

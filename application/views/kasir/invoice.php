@@ -14,7 +14,7 @@
             <div class="col-md-6">
                 <div class="text-right">
                     <h6 class="mb-15"><?= $penjualan->nama; ?></h6>
-                    <p class="font-14 mb-5"><?= $konfig->judul_website; ?></p>
+                    <p class="font-14 mb-5"><?= $konfig->nama_cv; ?></p>
                     <p class="font-14 mb-5"><?= $konfig->alamat; ?></p>
                     <p class="font-14 mb-5">Postcode 57713</p>
                 </div>

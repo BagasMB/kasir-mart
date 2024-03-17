@@ -22,7 +22,10 @@ class TransaksiModel extends CI_Model
 
     public function getPenjualan()
     {
+        date_default_timezone_set('Asia/Jakarta');
+        $tanggal = date('Y-m');
         $this->db->order_by('id_penjualan', 'DESC');
+        $this->db->where("DATE_FORMAT(tanggal,'%Y-%m')", $tanggal);
         $this->db->join('pelanggan', 'penjualan.id_pelanggan = pelanggan.id_pelanggan');
         return $this->db->get('penjualan')->result_array();
     }
