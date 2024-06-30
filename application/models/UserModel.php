@@ -10,6 +10,9 @@ class UserModel extends CI_Model
             'password'  => md5(htmlspecialchars($this->input->post('password'))),
             'image'     => 'default.png',
             'nama'      => htmlspecialchars($this->input->post('nama')),
+            'email'     => htmlspecialchars($this->input->post('email')),
+            'telp'      => htmlspecialchars($this->input->post('telp')),
+            'alamat'    => htmlspecialchars($this->input->post('alamat')),
             'level'     => $this->input->post('level'),
         );
         $this->db->insert('user', $data);
@@ -19,6 +22,9 @@ class UserModel extends CI_Model
     {
         $data = array(
             'nama'      => htmlspecialchars($this->input->post('nama')),
+            'email'     => htmlspecialchars($this->input->post('email')),
+            'telp'      => htmlspecialchars($this->input->post('telp')),
+            'alamat'    => htmlspecialchars($this->input->post('alamat')),
             'level'     => $this->input->post('level'),
         );
 

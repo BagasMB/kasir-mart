@@ -32,14 +32,38 @@ class Dashboard extends CI_Controller
 	public function profile()
 	{
 		$data = [
-			'title' => 'Profile Website',
-			'konfig' => $this->db->get('konfigurasi')->row(),
+			'title' => 'My Profile',
 			'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
 		];
 		$this->template->load('template', 'profile', $data);
 	}
 
 	public function updateprofile()
+	{
+		$data = array(
+			'nama'      => htmlspecialchars($this->input->post('nama')),
+			'email'     => htmlspecialchars($this->input->post('email')),
+			'telp'      => htmlspecialchars($this->input->post('telp')),
+			'alamat'    => htmlspecialchars($this->input->post('alamat'))
+		);
+
+		$where = array('id_user' => $this->input->post('id_user'));
+		$this->db->update('user', $data, $where);
+		$this->session->set_flashdata('berhasil', 'Gemgeekang Gacorr!!!');
+		redirect('Profile');
+	}
+
+	public function setting()
+	{
+		$data = [
+			'title' => 'Setting Website',
+			'konfig' => $this->db->get('konfigurasi')->row(),
+			'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
+		];
+		$this->template->load('template', 'setting', $data);
+	}
+
+	public function updateSetting()
 	{
 		$where = ['id_konfigurasi' => $this->input->post('id_konfigurasi')];
 		$data = [
@@ -50,6 +74,6 @@ class Dashboard extends CI_Controller
 		];
 		$this->db->update('konfigurasi', $data, $where);
 		$this->session->set_flashdata('berhasil', 'Gemgeekang Gacorr!!!');
-		redirect('Profile-Website');
+		redirect('Setting-Website');
 	}
 }

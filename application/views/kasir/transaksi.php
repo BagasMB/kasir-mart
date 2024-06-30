@@ -24,9 +24,6 @@
                     <div class="pull-left">
                         <h4 class="text-blue h5">Pilih Produk</h4>
                     </div>
-                    <!-- <div class="pull-right">
-                        <p><?= $pelanggan->nama_pelanggan; ?></p>
-                    </div> -->
                 </div>
                 <div class="form-group">
                     <label>Nama Pelanggan</label>
@@ -165,7 +162,7 @@
                     <div>
                         <form action="<?= base_url('penjualan/bayar2'); ?>" method="post">
                             <input type="hidden" value="<?= $pelanggan->id_pelanggan; ?>" name="id_pelanggan">
-                            <input type="hidden" value="<?= $total; ?>" name="total_tagihan">
+                            <input type="hidden" value="<?= $total; ?>" oninput="calculateTotal()" id="total_tagihan" name="total_tagihan">
                             <div class="form-group">
                                 <div class="row">
                                     <?php if ($pelanggan->id_pelanggan > 1) : ?>
@@ -187,7 +184,11 @@
                                     </div>
                                     <div class="col-md-4 col-sm-12 mb-2">
                                         <label>Bayar :</label>
-                                        <input class="form-control" type="text" name="bayar" autocomplete="off">
+                                        <input class="form-control" type="text" id="bayar" name="bayar" oninput="calculateTotal()" autocomplete="off">
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 mb-2">
+                                        <label>Kembalian :</label>
+                                        <input class="form-control" type="text" id="kembalian" name="kembalian" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -199,3 +200,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    function formatRupiah(number) {
+        return number.toLocaleString('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+    }
+
+    function calculateTotal() {
+        var total_tagihan = parseFloat(document.getElementById('total_tagihan').value) || 0;
+        var bayar = parseInt(document.getElementById('bayar').value) || 0;
+        var kembalian = bayar - total_tagihan;
+        document.getElementById('kembalian').value = formatRupiah(kembalian);
+    }
+</script>

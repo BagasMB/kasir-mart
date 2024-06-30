@@ -35,6 +35,8 @@
                         <th class="table-plus">No</th>
                         <th>Username</th>
                         <th>Name</th>
+                        <th>Email</th>
+                        <th>No Telp</th>
                         <th>Level</th>
                         <th class="datatable-nosort">Action</th>
                     </tr>
@@ -46,6 +48,8 @@
                             <td class="table-plus"><?= $no++; ?></td>
                             <td><?= $ser['username']; ?></td>
                             <td><?= $ser['nama']; ?></td>
+                            <td><?= $ser['email']; ?></td>
+                            <td><?= $ser['telp']; ?></td>
                             <td><?= $ser['level']; ?></td>
                             <td>
                                 <div class="dropdown">
@@ -64,7 +68,7 @@
                         </tr>
 
                         <div class="modal fade" id="modal-edit<?= $ser['id_user']; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title" id="myLargeModalLabel">Edit User</h4>
@@ -72,14 +76,31 @@
                                     </div>
                                     <form action="<?= base_url('user/edit'); ?>" method="post">
                                         <input type="hidden" name="id_user" value="<?= $ser['id_user']; ?>">
+                                        <input type="hidden" name="level" value="<?= $ser['level']; ?>">
                                         <div class="modal-body">
-                                            <div class="form-group">
-                                                <label>Username</label>
-                                                <input class="form-control" value="<?= $ser['username']; ?>" name="username" type="text" autocomplete="off" readonly>
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-3">
+                                                    <label>Username</label>
+                                                    <input class="form-control" name="username" value="<?= $ser['username']; ?>" type="text" autocomplete="off" readonly>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <label>Nama</label>
+                                                    <input class="form-control" type="text" name="nama" value="<?= $ser['nama']; ?>" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-3">
+                                                    <label>Email</label>
+                                                    <input class="form-control" type="email" name="email" value="<?= $ser['email']; ?>" autocomplete="off">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <label>No Telp</label>
+                                                    <input class="form-control" type="text" name="telp" value="<?= $ser['telp']; ?>" autocomplete="off">
+                                                </div>
                                             </div>
                                             <div class="form-group">
-                                                <label>Nama</label>
-                                                <input class="form-control" type="text" name="nama" value="<?= $ser['nama']; ?>" autocomplete="off">
+                                                <label>Alamat</label>
+                                                <input class="form-control" type="text" name="alamat" value="<?= $ser['alamat']; ?>" autocomplete="off">
                                             </div>
                                             <?php if ($user['username'] != $ser['username']) : ?>
                                                 <div class="form-group">
@@ -113,7 +134,7 @@
 
 
 <div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myLargeModalLabel">Tambah User</h4>
@@ -121,17 +142,35 @@
             </div>
             <form action="<?= base_url('user/tambah'); ?>" method="post">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>Username</label>
-                        <input class="form-control" placeholder="Username" name="username" type="text" autocomplete="off" autofocus>
+                    <div class="row">
+                        <div class="col-lg-6 mb-3">
+                            <label>Username</label>
+                            <input class="form-control" placeholder="Username" name="username" type="text" autocomplete="off" autofocus>
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <label>Password</label>
+                            <input class="form-control" placeholder="*******" name="password" type="password" autocomplete="off">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input class="form-control" placeholder="*******" name="password" type="password" autocomplete="off">
+                    <div class="row">
+                        <div class="col-lg-6 mb-3">
+                            <label>Nama</label>
+                            <input class="form-control" type="text" name="nama" placeholder="Johnny Brown" autocomplete="off">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <label>Email</label>
+                            <input class="form-control" type="email" name="email" placeholder="johnny@gmail.com" autocomplete="off">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Nama</label>
-                        <input class="form-control" type="text" name="nama" placeholder="Johnny Brown" autocomplete="off">
+                    <div class="row">
+                        <div class="col-lg-6 mb-3">
+                            <label>No Telp</label>
+                            <input class="form-control" type="text" name="telp" placeholder="081234567889" autocomplete="off">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <label>Alamat</label>
+                            <input class="form-control" type="text" name="alamat" placeholder="1807 Holden Street San Diego, CA 92115" autocomplete="off">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Level</label>

@@ -36,6 +36,15 @@ class User extends CI_Controller
         $this->form_validation->set_rules('nama', 'Nama', 'trim|required', [
             'required' => 'Nama Tidak Boleh Kosong'
         ]);
+        $this->form_validation->set_rules('email', 'Email', 'trim|required', [
+            'required' => 'Email Tidak Boleh Kosong'
+        ]);
+        $this->form_validation->set_rules('telp', 'No Telp', 'trim|required', [
+            'required' => 'No Telp Tidak Boleh Kosong'
+        ]);
+        $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required', [
+            'required' => 'Alamat Tidak Boleh Kosong'
+        ]);
 
         $username = $this->input->post('username');
         $cek_username = $this->db->where('username', $username)->count_all_results('user');

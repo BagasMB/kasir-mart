@@ -17,35 +17,64 @@
     </div>
 
 
-    <div class="pd-20 card-box mb-30">
-        <div class="clearfix mb-20">
-            <div class="pull-left">
-                <h4 class="text-blue h4">Table <?= $title; ?></h4>
+    <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
+            <div class="pd-20 card-box height-100-p">
+                <div class="profile-photo">
+                    <img src="<?= base_url('assets/images/profile/' . $user['image']); ?>" alt="" class="avatar-photo">
+                </div>
+                <h5 class="text-center h5 mb-0"><?= $user['nama']; ?></h5>
+                <p class="text-center text-muted font-14">Lorem ipsum dolor sit amet</p>
+                <div class="profile-info">
+                    <h5 class="mb-20 h5 text-blue">Contact Information</h5>
+                    <ul>
+                        <li>
+                            <span>Email Address:</span>
+                            <?= $user['email']; ?>
+                        </li>
+                        <li>
+                            <span>Phone Number:</span>
+                            <?= $user['telp']; ?>
+                        </li>
+                        <li>
+                            <span>Address:</span>
+                            <?= $user['alamat']; ?>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <form action="<?= base_url('update-profile') ?>" method="post" enctype="multipart/form-data">
-            <input type="hidden" class="form-control" name="id_konfigurasi" value="<?= $konfig->id_konfigurasi; ?>" autocomplete="off">
-            <div class="form-group">
-                <label>Nama CV</label>
-                <input type="text" class="form-control" name="nama_cv" value="<?= $konfig->nama_cv; ?>" autocomplete="off">
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30">
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix mb-20">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4"><?= $title; ?></h4>
+                    </div>
+                </div>
+                <form action="<?= base_url('update-profile') ?>" method="post" enctype="multipart/form-data">
+                    <input type="hidden" class="form-control" name="id_user" value="<?= $user['id_user']; ?>" autocomplete="off">
+                    <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $user['nama']; ?>" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" name="email" value="<?= $user['email']; ?>" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>No Telepon</label>
+                        <input type="text" class="form-control" name="telp" value="<?= $user['telp']; ?>" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Alamat</label>
+                        <input type="text" class="form-control" name="alamat" value="<?= $user['alamat']; ?>" autocomplete="off">
+                    </div>
+                    <div class="form-footer mt-6">
+                        <button type="submit" class="btn btn-primary btn-pill">Simpan</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" name="email" value="<?= $konfig->email; ?>" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label>Alamat</label>
-                <input type="text" class="form-control" name="alamat" value="<?= $konfig->alamat; ?>" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label>No Whatsapp</label>
-                <input type="text" class="form-control" name="no_wa" value="<?= $konfig->no_wa; ?>" autocomplete="off">
-            </div>
-            <div class="form-footer mt-6">
-                <button type="submit" class="btn btn-primary btn-pill">Simpan</button>
-                <button type="reset" class="btn btn-light btn-pill">Cancel</button>
-            </div>
-        </form>
+        </div>
     </div>
 
 </div>

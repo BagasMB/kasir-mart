@@ -13,14 +13,6 @@
                     </ol>
                 </nav>
             </div>
-            <!-- <div class="col-md-6 col-sm-12 text-right">
-                <div class="dropdown">
-                    <?php
-                    $keranjang = '<span class="btn btn-primary"> Keranjang <i class="icon-copy dw dw-shopping-cart"></i> : ' . $this->cart->total_items() . ' Items </span>';
-                    ?>
-                    <?= anchor('penjualan/detai_keranjang', $keranjang); ?>
-                </div>
-            </div> -->
         </div>
     </div>
 

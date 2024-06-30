@@ -53,5 +53,7 @@ $route['default_controller'] = 'dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
     
-$route['Profile-Website'] = 'dashboard/profile';
+$route['Setting-Website'] = 'dashboard/setting';
+$route['update-setting'] = 'dashboard/updateSetting';
+$route['Profile'] = 'dashboard/profile';
 $route['update-profile'] = 'dashboard/updateprofile';
