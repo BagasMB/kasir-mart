@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 07 Mar 2024 pada 02.03
--- Versi server: 10.4.28-MariaDB
--- Versi PHP: 8.0.28
+-- Host: localhost:3306
+-- Generation Time: Jun 30, 2024 at 04:47 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,26 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang`
+-- Table structure for table `barang`
 --
 
 CREATE TABLE `barang` (
-  `id_barang` int(11) NOT NULL,
-  `kode_barang` char(8) NOT NULL,
-  `nama` varchar(30) NOT NULL,
-  `stok` int(10) NOT NULL,
-  `harga` int(15) NOT NULL,
-  `id_kategori` int(11) NOT NULL
+  `id_barang` int NOT NULL,
+  `kode_barang` char(8) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `stok` int NOT NULL,
+  `harga` int NOT NULL,
+  `id_kategori` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `barang`
+-- Dumping data for table `barang`
 --
 
 INSERT INTO `barang` (`id_barang`, `kode_barang`, `nama`, `stok`, `harga`, `id_kategori`) VALUES
 (1, 'B0001', 'Kemeja', 0, 70000, 1),
-(3, 'B0002', 'Roti', 18, 2000, 5),
-(4, 'B0003', 'Sepatu', 47, 100000, 1),
+(3, 'B0002', 'Roti', 17, 2000, 5),
+(4, 'B0003', 'Sepatu', 46, 100000, 1),
 (5, 'B0004', 'Hoodie', 0, 70000, 1),
 (6, 'B0005', 'Tas', 0, 100000, 1),
 (7, 'B0006', 'Teh Gelas', 10, 1000, 6),
@@ -55,19 +55,19 @@ INSERT INTO `barang` (`id_barang`, `kode_barang`, `nama`, `stok`, `harga`, `id_k
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `detail_penjualan`
+-- Table structure for table `detail_penjualan`
 --
 
 CREATE TABLE `detail_penjualan` (
-  `id_detail_penjualan` int(11) NOT NULL,
-  `kode_penjualan` int(11) NOT NULL,
-  `kode_barang` char(8) NOT NULL,
-  `jumlah` int(11) NOT NULL,
-  `sub_total` int(11) NOT NULL
+  `id_detail_penjualan` int NOT NULL,
+  `kode_penjualan` int NOT NULL,
+  `kode_barang` char(8) COLLATE utf8mb4_general_ci NOT NULL,
+  `jumlah` int NOT NULL,
+  `sub_total` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `detail_penjualan`
+-- Dumping data for table `detail_penjualan`
 --
 
 INSERT INTO `detail_penjualan` (`id_detail_penjualan`, `kode_penjualan`, `kode_barang`, `jumlah`, `sub_total`) VALUES
@@ -95,21 +95,23 @@ INSERT INTO `detail_penjualan` (`id_detail_penjualan`, `kode_penjualan`, `kode_b
 (25, 2403044, 'B0003', 50, 5000000),
 (26, 2403065, 'B0002', 10, 20000),
 (29, 2403066, 'B0003', 2, 200000),
-(30, 2403067, 'B0002', 1, 2000);
+(30, 2403067, 'B0002', 1, 2000),
+(31, 2406301, 'B0002', 1, 0),
+(32, 2406301, 'B0003', 1, 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori`
+-- Table structure for table `kategori`
 --
 
 CREATE TABLE `kategori` (
-  `id_kategori` int(11) NOT NULL,
-  `nama_kategori` varchar(30) NOT NULL
+  `id_kategori` int NOT NULL,
+  `nama_kategori` varchar(30) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `kategori`
+-- Dumping data for table `kategori`
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
@@ -120,49 +122,49 @@ INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `konfigurasi`
+-- Table structure for table `konfigurasi`
 --
 
 CREATE TABLE `konfigurasi` (
-  `id_konfigurasi` int(11) NOT NULL,
-  `judul_website` varchar(30) NOT NULL,
-  `profil_website` text NOT NULL,
-  `instagram` varchar(50) NOT NULL,
-  `twitter` varchar(50) NOT NULL,
-  `facebook` varchar(80) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `alamat` varchar(50) NOT NULL,
-  `no_wa` varchar(50) NOT NULL
+  `id_konfigurasi` int NOT NULL,
+  `nama_cv` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `profil_website` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `instagram` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `twitter` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `facebook` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `alamat` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `no_wa` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `konfigurasi`
+-- Dumping data for table `konfigurasi`
 --
 
-INSERT INTO `konfigurasi` (`id_konfigurasi`, `judul_website`, `profil_website`, `instagram`, `twitter`, `facebook`, `email`, `alamat`, `no_wa`) VALUES
+INSERT INTO `konfigurasi` (`id_konfigurasi`, `nama_cv`, `profil_website`, `instagram`, `twitter`, `facebook`, `email`, `alamat`, `no_wa`) VALUES
 (1, 'Kasir-Mart', 'Haool', 'https://www.instagram.com/bgsmhrdkabdhrto_/', '', '', 'bagasmahardikabudi2007@gmail.com', 'Padangan RT 01/RW 07, Jungke, Karanganyar', '081235540603');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pelanggan`
+-- Table structure for table `pelanggan`
 --
 
 CREATE TABLE `pelanggan` (
-  `id_pelanggan` int(11) NOT NULL,
-  `nama_pelanggan` varchar(30) NOT NULL,
-  `telp` varchar(20) NOT NULL,
-  `alamat` varchar(50) NOT NULL,
-  `poin` bigint(20) NOT NULL
+  `id_pelanggan` int NOT NULL,
+  `nama_pelanggan` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `telp` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `alamat` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `poin` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `pelanggan`
+-- Dumping data for table `pelanggan`
 --
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `telp`, `alamat`, `poin`) VALUES
 (1, 'Bukan Pelanggan', '-', '-', 0),
-(2, 'Bagas', '0812335540603', 'Padangan, Jungke', 435600),
+(2, 'Bagas', '0812335540603', 'Padangan, Jungke', 438660),
 (3, 'Decooo', '12345678', 'Leptop Rusak', 180000),
 (4, 'Misbo', '0812888', 'ra ndue', 0),
 (5, 'Budi Santosa', '12345678', 'ok', 12000);
@@ -170,20 +172,20 @@ INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `telp`, `alamat`, `po
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pembelian`
+-- Table structure for table `pembelian`
 --
 
 CREATE TABLE `pembelian` (
-  `id_pembelian` int(11) NOT NULL,
-  `kode_pembelian` varchar(20) NOT NULL,
-  `kode_barang` char(8) NOT NULL,
-  `jumlah` int(11) NOT NULL,
+  `id_pembelian` int NOT NULL,
+  `kode_pembelian` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `kode_barang` char(8) COLLATE utf8mb4_general_ci NOT NULL,
+  `jumlah` int NOT NULL,
   `tanggal` date NOT NULL,
-  `kode_supplier` char(8) NOT NULL
+  `kode_supplier` char(8) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `pembelian`
+-- Dumping data for table `pembelian`
 --
 
 INSERT INTO `pembelian` (`id_pembelian`, `kode_pembelian`, `kode_barang`, `jumlah`, `tanggal`, `kode_supplier`) VALUES
@@ -197,22 +199,22 @@ INSERT INTO `pembelian` (`id_pembelian`, `kode_pembelian`, `kode_barang`, `jumla
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penjualan`
+-- Table structure for table `penjualan`
 --
 
 CREATE TABLE `penjualan` (
-  `id_penjualan` int(11) NOT NULL,
-  `kode_penjualan` int(11) NOT NULL,
+  `id_penjualan` int NOT NULL,
+  `kode_penjualan` int NOT NULL,
   `tanggal` date NOT NULL,
-  `total_tagihan` int(11) NOT NULL,
-  `id_pelanggan` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `potongan_harga` int(11) NOT NULL,
-  `bayar` int(11) NOT NULL
+  `total_tagihan` int NOT NULL,
+  `id_pelanggan` int NOT NULL,
+  `id_user` int NOT NULL,
+  `potongan_harga` int NOT NULL,
+  `bayar` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `penjualan`
+-- Dumping data for table `penjualan`
 --
 
 INSERT INTO `penjualan` (`id_penjualan`, `kode_penjualan`, `tanggal`, `total_tagihan`, `id_pelanggan`, `id_user`, `potongan_harga`, `bayar`) VALUES
@@ -235,27 +237,28 @@ INSERT INTO `penjualan` (`id_penjualan`, `kode_penjualan`, `tanggal`, `total_tag
 (19, 2403044, '2024-03-04', 5000000, 2, 5, 100000, 5000000),
 (20, 2403065, '2024-03-06', 20000, 4, 1, 100000, 20000),
 (25, 2403066, '2024-03-06', 200000, 5, 1, 0, 200000),
-(26, 2403067, '2024-03-06', 2000, 5, 1, 0, 2000);
+(26, 2403067, '2024-03-06', 2000, 5, 1, 0, 2000),
+(27, 2406301, '2024-06-30', 102000, 2, 1, 0, 150000);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `suara_8`
+-- Table structure for table `suara_8`
 --
 
 CREATE TABLE `suara_8` (
-  `id` int(11) NOT NULL,
-  `total_suara_8` int(11) NOT NULL,
-  `total_suara_sah_8` int(11) NOT NULL,
-  `total_suara_tidak_sah_8` int(11) NOT NULL,
-  `suara_no1_8` int(11) NOT NULL,
-  `suara_no2_8` int(11) NOT NULL,
-  `suara_no3_8` int(11) NOT NULL,
-  `nama_tps_8` varchar(20) NOT NULL
+  `id` int NOT NULL,
+  `total_suara_8` int NOT NULL,
+  `total_suara_sah_8` int NOT NULL,
+  `total_suara_tidak_sah_8` int NOT NULL,
+  `suara_no1_8` int NOT NULL,
+  `suara_no2_8` int NOT NULL,
+  `suara_no3_8` int NOT NULL,
+  `nama_tps_8` varchar(20) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `suara_8`
+-- Dumping data for table `suara_8`
 --
 
 INSERT INTO `suara_8` (`id`, `total_suara_8`, `total_suara_sah_8`, `total_suara_tidak_sah_8`, `suara_no1_8`, `suara_no2_8`, `suara_no3_8`, `nama_tps_8`) VALUES
@@ -266,18 +269,18 @@ INSERT INTO `suara_8` (`id`, `total_suara_8`, `total_suara_sah_8`, `total_suara_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `supplier`
+-- Table structure for table `supplier`
 --
 
 CREATE TABLE `supplier` (
-  `id_supplier` int(11) NOT NULL,
-  `nama_supplier` varchar(30) NOT NULL,
-  `kode_supplier` char(8) NOT NULL,
-  `telp` varchar(15) NOT NULL
+  `id_supplier` int NOT NULL,
+  `nama_supplier` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `kode_supplier` char(8) COLLATE utf8mb4_general_ci NOT NULL,
+  `telp` varchar(15) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `supplier`
+-- Dumping data for table `supplier`
 --
 
 INSERT INTO `supplier` (`id_supplier`, `nama_supplier`, `kode_supplier`, `telp`) VALUES
@@ -287,63 +290,66 @@ INSERT INTO `supplier` (`id_supplier`, `nama_supplier`, `kode_supplier`, `telp`)
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `temp`
+-- Table structure for table `temp`
 --
 
 CREATE TABLE `temp` (
-  `id_temp` int(11) NOT NULL,
-  `kode_barang` char(10) NOT NULL,
-  `jumlah` int(11) NOT NULL,
-  `id_pelanggan` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `id_temp` int NOT NULL,
+  `kode_barang` char(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `jumlah` int NOT NULL,
+  `id_pelanggan` int NOT NULL,
+  `id_user` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `temp`
+-- Dumping data for table `temp`
 --
 
 INSERT INTO `temp` (`id_temp`, `kode_barang`, `jumlah`, `id_pelanggan`, `id_user`) VALUES
-(42, 'B0003', 1, 2, 1);
+(45, 'B0002', 1, 2, 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
-  `id_user` int(10) NOT NULL,
-  `username` varchar(25) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `nama` varchar(30) NOT NULL,
-  `image` varchar(50) NOT NULL,
-  `level` enum('Kasir','Admin') NOT NULL
+  `id_user` int NOT NULL,
+  `username` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `telp` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `alamat` varchar(225) COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `level` enum('Kasir','Admin') COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `password`, `nama`, `image`, `level`) VALUES
-(1, 'admin', 'd74600e380dbf727f67113fd71669d88', 'Bagas', 'default.png', 'Admin'),
-(5, 'kasir', 'd74600e380dbf727f67113fd71669d88', 'toya', 'default.png', 'Kasir');
+INSERT INTO `user` (`id_user`, `username`, `password`, `nama`, `email`, `telp`, `alamat`, `image`, `level`) VALUES
+(1, 'admin', 'd74600e380dbf727f67113fd71669d88', 'Bagas', 'bagas@gmail.com', '081235540603', 'Jln. Srwijaya, Padangan  RT 01/RW 07, Jungke', 'default.png', 'Admin'),
+(5, 'kasir', 'd74600e380dbf727f67113fd71669d88', 'toya', 'hasha@gmail.com', '7665', 'vhghv', 'default.png', 'Kasir');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `voucher`
+-- Table structure for table `voucher`
 --
 
 CREATE TABLE `voucher` (
-  `id_voucher` int(11) NOT NULL,
-  `nama_voucher` varchar(50) NOT NULL,
-  `potongan_harga` int(11) NOT NULL,
-  `jumlah` int(11) NOT NULL,
+  `id_voucher` int NOT NULL,
+  `nama_voucher` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `potongan_harga` int NOT NULL,
+  `jumlah` int NOT NULL,
   `waktu` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `voucher`
+-- Dumping data for table `voucher`
 --
 
 INSERT INTO `voucher` (`id_voucher`, `nama_voucher`, `potongan_harga`, `jumlah`, `waktu`) VALUES
@@ -356,152 +362,152 @@ INSERT INTO `voucher` (`id_voucher`, `nama_voucher`, `potongan_harga`, `jumlah`,
 --
 
 --
--- Indeks untuk tabel `barang`
+-- Indexes for table `barang`
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id_barang`);
 
 --
--- Indeks untuk tabel `detail_penjualan`
+-- Indexes for table `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
   ADD PRIMARY KEY (`id_detail_penjualan`);
 
 --
--- Indeks untuk tabel `kategori`
+-- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
--- Indeks untuk tabel `konfigurasi`
+-- Indexes for table `konfigurasi`
 --
 ALTER TABLE `konfigurasi`
   ADD PRIMARY KEY (`id_konfigurasi`);
 
 --
--- Indeks untuk tabel `pelanggan`
+-- Indexes for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`id_pelanggan`);
 
 --
--- Indeks untuk tabel `pembelian`
+-- Indexes for table `pembelian`
 --
 ALTER TABLE `pembelian`
   ADD PRIMARY KEY (`id_pembelian`);
 
 --
--- Indeks untuk tabel `penjualan`
+-- Indexes for table `penjualan`
 --
 ALTER TABLE `penjualan`
   ADD PRIMARY KEY (`id_penjualan`);
 
 --
--- Indeks untuk tabel `suara_8`
+-- Indexes for table `suara_8`
 --
 ALTER TABLE `suara_8`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `supplier`
+-- Indexes for table `supplier`
 --
 ALTER TABLE `supplier`
   ADD PRIMARY KEY (`id_supplier`);
 
 --
--- Indeks untuk tabel `temp`
+-- Indexes for table `temp`
 --
 ALTER TABLE `temp`
   ADD PRIMARY KEY (`id_temp`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- Indeks untuk tabel `voucher`
+-- Indexes for table `voucher`
 --
 ALTER TABLE `voucher`
   ADD PRIMARY KEY (`id_voucher`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `barang`
+-- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_barang` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `detail_penjualan`
+-- AUTO_INCREMENT for table `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
-  MODIFY `id_detail_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_detail_penjualan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT untuk tabel `kategori`
+-- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kategori` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `konfigurasi`
+-- AUTO_INCREMENT for table `konfigurasi`
 --
 ALTER TABLE `konfigurasi`
-  MODIFY `id_konfigurasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_konfigurasi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `pelanggan`
+-- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pelanggan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `pembelian`
+-- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_pembelian` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT untuk tabel `penjualan`
+-- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_penjualan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- AUTO_INCREMENT untuk tabel `suara_8`
+-- AUTO_INCREMENT for table `suara_8`
 --
 ALTER TABLE `suara_8`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `supplier`
+-- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `id_supplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_supplier` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `temp`
+-- AUTO_INCREMENT for table `temp`
 --
 ALTER TABLE `temp`
-  MODIFY `id_temp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_temp` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `voucher`
+-- AUTO_INCREMENT for table `voucher`
 --
 ALTER TABLE `voucher`
-  MODIFY `id_voucher` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_voucher` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
