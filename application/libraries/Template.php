@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+#[\AllowDynamicProperties]
 class Template
 {
     var $template_data = array();
