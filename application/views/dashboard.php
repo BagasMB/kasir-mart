@@ -17,7 +17,7 @@
         <div class="card-box pd-30 height-100-p">
             <div class="progress-box text-center">
                 <h5 class="text-blue padding-top-10 h5">Penjualan Hari Ini</h5>
-                <h4 class="d-block">Rp. <?= number_format($hari_ini, 0, ',', '.'); ?></h4>
+                <h4 class="d-block">Rp. <?= number_format($hari_ini ?? 0, 0, ',', '.'); ?></h4>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
         <div class="card-box pd-30 height-100-p">
             <div class="progress-box text-center">
                 <h5 class="text-light-green padding-top-10 h5">Penjualan Bulan Ini</h5>
-                <h4 class="d-block">Rp. <?= number_format($bulan_ini, 0, ',', '.'); ?></h4>
+                <h4 class="d-block">Rp. <?= number_format($bulan_ini ?? 0, 0, ',', '.'); ?></h4>
             </div>
         </div>
     </div>
